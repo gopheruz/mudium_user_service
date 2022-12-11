@@ -50,4 +50,22 @@ func main() {
 	}
 	fmt.Println("user created")
 	fmt.Println(data)
+	data, err = memory.User().GetByEmail("nurmuhammadhasanov0@gmail.com")
+	if err != nil{
+		panic(err)
+	}
+	fmt.Println(data)
+
+	many, err := memory.User().GetAll(&repo.GetAllUsersParams{
+		Limit: 10,
+		Page: 1,
+		Search: "a",
+	})
+	if err !=nil {
+		panic(err)
+	}
+	for _, val := range many.Users{
+		fmt.Println(val)
+	}
+	fmt.Println(many.Count)
 }
